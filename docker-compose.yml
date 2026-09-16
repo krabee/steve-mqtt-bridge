@@ -1,0 +1,25 @@
+services:
+  bridge:
+    build: .
+    container_name: steve-mqtt-bridge
+    restart: unless-stopped
+    environment:
+      # --- Database (SteVe MariaDB, read-only user) ---
+      DB_HOST: ${DB_HOST:-localhost}
+      DB_PORT: ${DB_PORT:-3306}
+      DB_USER: ${DB_USER:-steve_readonly}
+      DB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+      DB_NAME: ${DB_NAME:-stevedb}
+
+      # --- MQTT broker ---
+      MQTT_HOST: ${MQTT_HOST:-localhost}
+      MQTT_PORT: ${MQTT_PORT:-1883}
+      MQTT_USERNAME: ${MQTT_USERNAME:-}
+      MQTT_PASSWORD: ${MQTT_PASSWORD:-}
+
+      # --- Behaviour ---
+      MQTT_BASE: ${MQTT_BASE:-steve}
+      DISCOVERY_PREFIX: ${DISCOVERY_PREFIX:-homeassistant}
+      POLL_INTERVAL_SEC: ${POLL_INTERVAL_SEC:-60}
+      STATUS_STALE_SEC: ${STATUS_STALE_SEC:-900}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}

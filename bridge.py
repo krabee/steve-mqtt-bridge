@@ -87,6 +87,7 @@ def db_connect():
         database=DB_NAME,
         charset="utf8mb4",
         cursorclass=pymysql.cursors.DictCursor,
+        autocommit=True,
         connect_timeout=10,
         read_timeout=15,
     )

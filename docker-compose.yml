@@ -23,3 +23,11 @@ services:
       POLL_INTERVAL_SEC: ${POLL_INTERVAL_SEC:-60}
       STATUS_STALE_SEC: ${STATUS_STALE_SEC:-900}
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    networks:
+      - default
+      - steve-net
+
+networks:
+  steve-net:
+    external: true
+    name: steve-steve-3141_default
